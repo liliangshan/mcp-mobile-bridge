@@ -1,48 +1,68 @@
-# mcp-mobile-native 🚀
-
-![MCP Support](https://img.shields.io/badge/MCP-Supported-blue?style=flat-square)
-![Status](https://img.shields.io/badge/Status-Proposal-orange?style=flat-square)
-![Protocol](https://img.shields.io/badge/Protocol-SSE--Direct-green?style=flat-square)
+# mcp-mobile-bridge 🚀
 
 **Empowering Gemini Mobile with decentralized, direct SSE-MCP integration. Bridging mobile AI with private standards and public tools via zero-proxy, client-side requests.**
 
 ---
 
 ## 💡 The Vision
-The Model Context Protocol (MCP) is the "USB-C for AI." Currently, mobile AI assistants are limited by static extensions. We propose that the Gemini Mobile App should support **Direct, Decentralized SSE (Server-Sent Events) MCP integration**.
+
+The Model Context Protocol (MCP) is the "USB-C for AI." Currently, mobile AI assistants operate as "Isolated Brains," lacking access to private, structured project contexts. We propose that the **Gemini Mobile App** should natively support **Direct, Decentralized SSE (Server-Sent Events) MCP integration**.
 
 ## 🎯 Key Proposal: Zero-Proxy Architecture
-Unlike traditional cloud-to-cloud integrations, this repository advocates for **Direct Request Architecture**:
 
-1. **Bypass Middlemen**: The Gemini App makes direct HTTPS/SSE requests to the MCP endpoint.
-2. **Privacy & Security**: Private data never touches third-party transit servers; it moves directly between the user's infrastructure and the on-device AI agent.
-3. **Low Latency**: Eliminating Google-side proxies reduces round-trip time.
+Unlike traditional cloud-to-cloud integrations, this repository advocates for a **Direct Request Architecture**:
 
+1. **Bypass Middlemen**: The Gemini App makes direct HTTPS/SSE requests from the mobile client to the MCP endpoint.
+2. **Data Sovereignty**: Private engineering standards and sensitive data never touch third-party transit servers.
+3. **Latency & Reliability**: Eliminating proxies reduces Round-Trip Time (RTT), critical for Gemini Live multimodal interactions.
+
+### Technical Architecture Diagram
+
+
+sequenceDiagram
+    autonumber
+    participant App as Gemini Mobile App
+    participant Local as Private MCP (SSE)
+    participant Public as Public MCP (SSE)
+
+    Note over App: Step 1: Direct Handshake
+    App->>Local: GET /sse (Direct)
+    Local-->>App: Tools Discovery
+    
+    Note over App: Step 2: Global Knowledge
+    App->>Public: Fetch Real-time Data
+    Public-->>App: Structured Metadata
+
+    Note over App: Step 3: Standards Sync
+    App->>Local: Call Tool: get_project_structure
+    Local-->>App: Directory Map (Context Caching)
 
 
 ---
 
-## 🛠️ Implementation Concept (The "Mental Imprint")
-Using our project `@liangshanli/mcp-server-project-standards` as a benchmark, this integration allows:
+## 🛠️ Implementation Case: Software-Defined Standards (SDS)
 
-- **Namespace Routing**: Use `PROJECT_PREFIX` to ensure Gemini never confuses standards between different projects.
-- **Hierarchy Mapping**: A dehydrated directory tree (`get_project_structure`) that slashes token costs by up to 90%.
+Using our reference implementation `@liangshanli/mcp-server-project-standards` as a benchmark, this integration enables:
 
-## 📝 Formal RFC (Request for Comments)
-We invite the Google Gemini Engineering team and the MCP community to review the decentralized mobile integration logic.
-
-### Core Requirements for Mobile App:
-- Native **SSE (Server-Sent Events)** client support.
-- Dynamic **Tool Discovery** via `list_tools`.
-- Support for **Custom Auth Headers** for private MCP access.
+* **Namespace Isolation**: Using `PROJECT_PREFIX` to prevent context pollution between different projects.
+* **Hierarchy Mapping**: A "dehydrated" directory tree that reduces token consumption by up to **90%** via Gemini 3 Context Caching.
+* **Instructional Imprint**: Forcing the AI to adhere to specific engineering protocols even when working from a mobile device.
 
 ---
+## 📝 RFC (Request for Comments)
 
+We invite the Google Gemini Engineering team and the global MCP community to discuss:
+
+1.  **SSE Client Implementation**: Native `EventSource` support within the mobile app.
+2.  **Dynamic Discovery**: Auto-mapping `list_tools` to Gemini's function-calling layer.
+3.  **Security**: Support for standard `Authorization` headers and `CORS` for secure E2E connections.
+
+---
 ## 🤝 Call to Action
-If you are an engineer at Google, an AI architect, or a developer interested in the future of mobile AI:
-- **Join the Discussion**: Open an issue or a discussion thread here.
-- **Mention**: Ping `@LoganKilpatrick` or the Gemini DevRel team to bring this to their attention.
+
+* **Star this repo** to show support for the decentralized AI movement.
+* **Join the Discussion**: [Open an Issue](https://github.com/liliangshan/mcp-mobile-bridge/issues) to share your feedback.
+* **Connect**: Mention **@LoganKilpatrick** or the Gemini DevRel team on social media to highlight this proposal.
 
 ---
-*Created by @liliangshan - Let's build the future of decentralized AI intelligence.*
-
+*Created by @liliangshan - Advocating for an open, decentralized AI infrastructure.*
